@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Submit feedback and experience our real-time client-side NLP sentiment classifier."
+    />
+    <title>Customer Feedback - MyCleaningSystem</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeBtn" class="floating-dark" aria-label="Toggle Dark Mode">🌙</button>
+
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <h2 class="logo">ShineSystem <span>AI</span></h2>
+        <a href="home.html">🏠 Home</a>
+        <a href="booking.html">📅 Booking & Estimate</a>
+        <a href="register.html">📝 Register</a>
+        <a href="login.html">🔑 Login</a>
+        <a href="feedback.html" class="active">⭐ Feedback Analysis</a>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="page-wrapper">
+        <div class="form-container">
+          <h2>Customer Feedback</h2>
+          <p class="subtitle">
+            Submit reviews and check the real-time sentiment analysis output by our TF-IDF model.
+          </p>
+
+          <form id="feedbackForm" onsubmit="return false;">
+            <label for="feedbackName">Full Name</label>
+            <input type="text" id="feedbackName" placeholder="Jane Doe" required />
+
+            <label for="feedbackRating">Rating</label>
+            <select id="feedbackRating" required>
+              <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+              <option value="4">⭐⭐⭐⭐ (Good)</option>
+              <option value="3">⭐⭐⭐ (Average)</option>
+              <option value="2">⭐⭐ (Fair)</option>
+              <option value="1">⭐ (Poor)</option>
+            </select>
+
+            <label for="feedbackText">Your Comments</label>
+            <textarea
+              id="feedbackText"
+              placeholder="Write about your experience here..."
+              required
+            ></textarea>
+
+            <!-- Sentiment Classifier Feedback Panel -->
+            <div class="sentiment-analyzer">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <strong style="font-size: 14.5px">Real-Time Sentiment:</strong>
+                <span class="sentiment-badge neutral" id="sentimentBadge">Neutral 😐</span>
+              </div>
+              <div class="sentiment-meter">
+                <div class="sentiment-meter-bar" id="sentimentMeterBar" style="width: 50%"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 13px">
+                <span class="sentiment-confidence"
+                  >Confidence: <span id="sentimentConfidence">50.0%</span></span
+                >
+                <span id="mlModelLabel" style="color: var(--text-muted); font-size: 11px"
+                  >TF-IDF + LogReg ML Model</span
+                >
+              </div>
+              <div
+                id="matchedKeywords"
+                style="font-size: 12px; color: var(--text-muted); margin-top: 5px; display: none"
+              >
+                <strong>Detected Vocab:</strong>
+                <span id="keywordsList" style="font-style: italic"></span>
+              </div>
+            </div>
+
+            <button type="submit" id="submitFeedbackBtn">Submit Feedback</button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <!-- Script Dependencies & Machine Learning -->
+    <script src="js/validation.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/model_sentiment.js"></script>
+    <script src="js/sentiment.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

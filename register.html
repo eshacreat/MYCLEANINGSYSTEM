@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - MyCleaningSystem</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button type="button" id="darkModeBtn" class="floating-dark" aria-label="Toggle Dark Mode">
+      🌙
+    </button>
+
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <h2 class="logo">ShineSystem <span>AI</span></h2>
+        <a href="home.html">🏠 Home</a>
+        <a href="booking.html">📅 Booking & Estimate</a>
+        <a href="register.html" class="active">📝 Register</a>
+        <a href="login.html">🔑 Login</a>
+        <a href="feedback.html">⭐ Feedback Analysis</a>
+      </aside>
+
+      <!-- Main Workspace -->
+      <main class="page-wrapper">
+        <div class="form-container">
+          <h2>Create Account</h2>
+          <p class="subtitle">Join us to experience smart cleaning services.</p>
+
+          <form id="registerForm" onsubmit="return false;">
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" placeholder="Jane Doe" required />
+
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" placeholder="jane.doe@example.com" required />
+
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" placeholder="••••••••" required />
+
+            <label for="regConfirmPassword">Confirm Password</label>
+            <input type="password" id="regConfirmPassword" placeholder="••••••••" required />
+
+            <button type="submit" class="primary-btn">Create Account</button>
+
+            <p
+              style="
+                text-align: center;
+                margin-top: 15px;
+                font-size: 14px;
+                color: var(--text-muted);
+              "
+            >
+              Already have an account?
+              <a
+                href="login.html"
+                style="color: var(--primary); text-decoration: none; font-weight: 500"
+                >Login here</a
+              >
+            </p>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script defer src="js/app.js"></script>
+  </body>
+</html>

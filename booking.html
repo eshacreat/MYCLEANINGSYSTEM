@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Book a smart cleaning service with real-time AI duration and price estimation."
+    />
+    <title>Smart Booking - MyCleaningSystem</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeBtn" class="floating-dark" aria-label="Toggle Dark Mode">🌙</button>
+
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <h2 class="logo">ShineSystem <span>AI</span></h2>
+        <a href="home.html">🏠 Home</a>
+        <a href="booking.html" class="active">📅 Booking & Estimate</a>
+        <a href="register.html">📝 Register</a>
+        <a href="login.html">🔑 Login</a>
+        <a href="feedback.html">⭐ Feedback Analysis</a>
+      </aside>
+
+      <!-- Main Workspace -->
+      <main class="page-wrapper">
+        <div class="booking-grid">
+          <!-- Wizard Form Container -->
+          <div class="form-container">
+            <h2>Smart Service Booking</h2>
+            <p class="subtitle">
+              Complete the fields below. The AI will estimate your service in real time.
+            </p>
+
+            <form id="bookingForm" onsubmit="return false;">
+              <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+              </div>
+
+              <!-- Step 1: Property Details -->
+              <div class="form-step active-step" id="step1">
+                <label for="serviceType">Select Cleaning Service</label>
+                <select id="serviceType" required>
+                  <option value="home" selected>Home Cleaning</option>
+                  <option value="office">Office Cleaning</option>
+                  <option value="deep">Deep Restoration Cleaning</option>
+                  <option value="carpet">Specialized Carpet Cleaning</option>
+                </select>
+
+                <label for="squareFootage">Total Area (Square Footage)</label>
+                <input
+                  type="number"
+                  id="squareFootage"
+                  min="200"
+                  max="10000"
+                  value="1200"
+                  required
+                />
+
+                <label for="numRooms">Number of Rooms</label>
+                <input type="number" id="numRooms" min="1" max="15" value="3" required />
+
+                <button type="button" class="next-btn" onclick="goToStep(2)">Next Step</button>
+              </div>
+
+              <!-- Step 2: Personal & Schedule -->
+              <div class="form-step" id="step2">
+                <label for="dirtLevel">Current Dirtiness Level</label>
+                <select id="dirtLevel" required>
+                  <option value="light">Light (Dusting, minor touchup)</option>
+                  <option value="standard" selected>Standard (Typical lived-in state)</option>
+                  <option value="heavy">Heavy (Post-construction, deep grime)</option>
+                </select>
+
+                <label for="customerName">Your Full Name</label>
+                <input type="text" id="customerName" placeholder="John Doe" required />
+
+                <div class="btn-group">
+                  <button type="button" class="prev-btn" onclick="goToStep(1)">Back</button>
+                  <button type="button" class="submit-btn" id="bookNowBtn">Confirm Booking</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Column: Real-Time ML Price Estimator Panel -->
+          <div class="ml-estimator-card">
+            <div class="ml-tag" id="inferenceBadge">🤖 AI Estimator Active</div>
+            <h3>AI Invoice Estimation</h3>
+            <p class="est-desc">
+              Dynamic pricing and labor times computed instantly by client-side inference.
+            </p>
+
+            <div class="est-metric">
+              <span class="label">Est. Duration</span>
+              <span class="val"><span id="estDuration">--</span> hrs</span>
+            </div>
+
+            <div class="est-metric">
+              <span class="label">Est. Price</span>
+              <span class="val">$<span id="estPrice">--</span></span>
+            </div>
+
+            <div class="est-desc">
+              <strong>ML Model Summary:</strong>
+              <p style="margin-top: 5px; font-style: italic">
+                Ridge regression models trained in Python (`Scikit-Learn`) evaluate numerical
+                parameters and scale inputs using training dataset means & standard deviations
+                before executing dot-product predictions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Script Dependencies & Machine Learning -->
+    <script defer src="js/validation.js"></script>
+    <script defer src="js/api.js"></script>
+    <script defer src="js/model_estimator.js"></script>
+    <script defer src="js/estimator.js"></script>
+    <script defer src="js/booking.js"></script>
+  </body>
+</html>

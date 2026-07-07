@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - MyCleaningSystem</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button type="button" id="darkModeBtn" class="floating-dark" aria-label="Toggle Dark Mode">
+      🌙
+    </button>
+
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <h2 class="logo">ShineSystem <span>AI</span></h2>
+        <a href="home.html">🏠 Home</a>
+        <a href="booking.html">📅 Booking & Estimate</a>
+        <a href="register.html">📝 Register</a>
+        <a href="login.html" class="active">🔑 Login</a>
+        <a href="feedback.html">⭐ Feedback Analysis</a>
+      </aside>
+
+      <!-- Main Workspace -->
+      <main class="page-wrapper">
+        <div class="form-container">
+          <h2>Account Login</h2>
+          <p class="subtitle">Welcome back! Please enter your credentials to login.</p>
+
+          <form id="loginForm" onsubmit="return false;">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" placeholder="jane.doe@example.com" required />
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" required />
+
+            <button type="submit" class="primary-btn">Sign In</button>
+
+            <p
+              style="
+                text-align: center;
+                margin-top: 15px;
+                font-size: 14px;
+                color: var(--text-muted);
+              "
+            >
+              Don't have an account?
+              <a
+                href="register.html"
+                style="color: var(--primary); text-decoration: none; font-weight: 500"
+                >Register here</a
+              >
+            </p>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script defer src="js/app.js"></script>
+  </body>
+</html>
