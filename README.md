@@ -3,7 +3,9 @@ An AI-powered, serverless cleaning service web application that predicts service
 
 📱 Preview
 Tech Aesthetic: Built with a sleek, responsive, and high-contrast user interface designed for seamless user interaction.
-<img width="1366" height="720" alt="image" src="https://github.com/user-attachments/assets/29fcfc9f-6990-41f4-80a9-58d07a75a253" />
+<img width="1347" height="654" alt="WhatsApp Image 2026-07-08 at 10 31 11 AM" src="https://github.com/user-attachments/assets/3adc401d-1a7e-450a-9306-24a054ee4c40" />
+
+
 
 
 
