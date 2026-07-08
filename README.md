@@ -1,109 +1,54 @@
-# ShineSystem AI - Smart Cleaning Optimization Platform
+# ✨ ShineSystem AI
+An AI-powered, serverless cleaning service web application that predicts service costs, estimates cleaning durations, analyzes feedback sentiment, and provides automated chatbot assistance—running entirely inside the browser.
 
-[![GitHub Pages](https://img.shields.io/badge/Live_Demo-GitHub_Pages-4f46e5?style=for-the-badge)](home.html)
-[![Python Version](https://img.shields.io/badge/Python-3.11+-blue?style=flat-square&logo=python)](ml_pipeline/)
-[![ML Library](https://img.shields.io/badge/scikit--learn-latest-orange?style=flat-square&logo=scikit-learn)](ml_pipeline/)
-[![Frontend JS](https://img.shields.io/badge/Vanilla_JS-ES6+-f7df1e?style=flat-square&logo=javascript)](js/)
+📱 Preview
+Tech Aesthetic: Built with a sleek, responsive, and high-contrast user interface designed for seamless user interaction.
+<img width="1366" height="720" alt="image" src="https://github.com/user-attachments/assets/29fcfc9f-6990-41f4-80a9-58d07a75a253" />
 
-**ShineSystem AI** (formerly MyCleaningSystem) is a modern, responsive web application for commercial and residential cleaning services integrated with client-side **Machine Learning** models. 
 
-Rather than relying on heavy server-side endpoints or large external libraries, this project implements **first-principles mathematical inference** (matrix dot-products, TF-IDF vectorization, Sigmoid, and Softmax activations) directly in vanilla JavaScript. This guarantees sub-millisecond execution, offline support, zero hosting costs, and complete immunity to Cross-Origin Resource Sharing (CORS) blocks under the `file://` protocol.
 
----
+💡 Why I Built This
+The goal of this project was to challenge the traditional backend-dependent architecture of Machine Learning applications. Instead of relying on heavy cloud APIs or server infrastructure, ShineSystem AI handles everything on the client side.
 
-## 🚀 Key AI/ML Features
+By exporting trained Python models into native JavaScript inference, the application remains incredibly lightweight, highly private, fast, and completely free to host.
 
-### 1. Real-Time Price & Labor Hour Estimator (Ridge Regression)
-- **Problem**: Cleaning estimations are typically static, leading to miscalculated labor costs or unhappy clients.
-- **ML Solution**: We train a **Ridge Regression model** on synthetic datasets to predict both cleaning duration (hours) and total cost ($).
-- **Features Analyzed**:
-  - Property size (Square footage - numerical, normalized)
-  - Room count (numerical, normalized)
-  - Service type (Standard, Office, Deep, Carpet - One-hot encoded)
-  - Property dirtiness level (Light, Standard, Heavy - One-hot encoded)
-- **Mathematical Inference in JS**: Scales numerical inputs dynamically using the training set's mean/standard deviation, encodes categoricals, and computes:
-  $$\hat{y} = w^T x + b$$
+⚡ Features
+📊 AI Cleaning Cost Prediction: Utilizes regression modeling to instantly calculate service costs based on property size and specific requirements.
 
-### 2. Live Feedback Sentiment Analyzer (NLP Binary Classification)
-- **Problem**: Businesses struggle to monitor customer satisfaction at scale.
-- **ML Solution**: An NLP classifier using **TF-IDF (Term Frequency-Inverse Document Frequency) + Binary Logistic Regression** to analyze customer feedback in real time as they type.
-- **Visuals**: Displays a dynamic sentiment badge (Positive 😊, Neutral 😐, Negative 😡) alongside a confidence bar indicating model certainty.
-- **Mathematical Inference in JS**: Tokenizes input text, calculates Term Frequency, applies pre-computed Inverse Document Frequencies (IDF), computes linear weights, and evaluates the Sigmoid function:
-  $$P(y=1|x) = \sigma(w^T x + b) = \frac{1}{1 + e^{-(w^T x + b)}}$$
+⏱️ Cleaning Duration Estimation: Accurately estimates time requirements to optimize schedule planning.
 
-### 3. Smart NLP Support Chatbot (Multi-Class Sentiment & Softmax)
-- **Problem**: Customer service centers receive repetitive questions about bookings, prices, and support.
-- **ML Solution**: A **Multi-Class Logistic Regression model** (Softmax Regression) that classifies user queries into pre-defined intents (`greeting`, `pricing`, `booking_info`, `services`, `contact`, `goodbye`).
-- **Mathematical Inference in JS**: Preprocesses input query, computes TF-IDF features, evaluates scores for all classes, and applies the **Softmax function** to resolve the intent with the highest probability:
-  $$P(\text{class}=c) = \frac{e^{z_c}}{\sum_{j=1}^{C} e^{z_j}}$$
-- **Developer Metrics**: Outputs full probability distributions and prediction logs to the browser console.
+🎭 Customer Sentiment Analysis: Runs real-time text analysis on customer reviews using an in-browser TF-IDF and classification pipeline.
 
----
+💬 Intent-Based AI Chatbot: Provides instant customer support and handles common queries locally.
 
-## 📁 Project Architecture
+🔒 100% Client-Side Architecture: No data leaves the user's browser, ensuring absolute data privacy and zero server overhead.
 
-```mermaid
-graph TD
-    subgraph Python Pipeline (Training)
-        A[generate_data.py] -->|CSV Datasets| B[train_all.py]
-        B -->|Train Estimator| C[train_estimator.py]
-        B -->|Train Sentiment| D[train_sentiment.py]
-        B -->|Train Chatbot| E[train_chatbot.py]
-        C -->|Outputs weights & scale parameters| F[js/model_estimator.js]
-        D -->|Outputs vocabulary & weights| G[js/model_sentiment.js]
-        E -->|Outputs intents & weights| H[js/model_chatbot.js]
-    end
+🛠️ Tech Stack
+Machine Learning (Training Pipeline)
+Python & NumPy: For data preprocessing and feature engineering.
 
-    subgraph Client-Side Web (Inference)
-        F -->|Loads constants| I[js/estimator.js]
-        G -->|Loads constants| J[js/sentiment.js]
-        H -->|Loads constants| K[js/chatbot.js]
-        I & J & K -->|Calculates Math from Scratch| L[js/app.js & js/booking.js]
-        L -->|Updates UI dynamically| M[HTML Views: Home, Booking, Feedback]
-    end
-```
+Scikit-Learn: Used to train the underlying models (Ridge Regression for costs, Logistic Regression for sentiment, and TF-IDF Vectorization for text processing).
 
----
+Frontend & Inference (Deployment)
+Vanilla HTML5 & CSS3: For a modern, clean, and highly responsive user interface.
 
-## 🛠️ Python ML Training Pipeline (`ml_pipeline/`)
+JavaScript (ES6+): For state management, UI logic, and running the exported model weights and mathematical formulas directly in the browser.
 
-To view the data engineering and training script logs, head over to the [ml_pipeline](file:///C:/Users/fa931/OneDrive/Desktop/MyCleaningSystem/ml_pipeline) directory.
+🧠 What I Learned & Engineering Insights
+Cross-Language Model Migration: Mastered the process of extracting model coefficients, intercepts, and vocabulary weights from Python's Scikit-Learn and re-implementing the matrix mathematics natively in JavaScript.
 
-### Training Requirements
-Install dependencies using pip:
-```bash
-pip install -r ml_pipeline/requirements.txt
-```
+Client-Side Feature Preprocessing: Recreated a text tokenization and TF-IDF vectorizer from scratch in JavaScript to ensure user input matched the model's expected training features.
 
-### Run Training Pipeline
-The master training script generates synthetic datasets, trains the models, generates performance plots, and writes output parameter arrays straight into the web application folder:
-```bash
-python ml_pipeline/train_all.py
-```
+Serverless Deployment: Eliminated backend maintenance and API latency, achieving instantaneous, offline-capable ML inference.
 
-### Models Evaluation Results
-After running the pipeline, check out the generated evaluation plots inside `ml_pipeline/evaluation_plots/`:
-- **`estimator_results.png`**: Actual vs. Predicted scatter plots showing model fit ($R^2$ scores).
-- **`sentiment_results.png`**: Confusion matrix showing classification performance.
+🚀 Future Roadmap
+[ ] Advanced NLP: Integrate lightweight ONNX Runtime Web or TensorFlow.js models for more nuanced chatbot conversations.
 
----
+[ ] Dynamic Booking System: Allow users to seamlessly transition from cost estimation to scheduling.
 
-## 💻 Web App Deployment & Host
-The entire web interface is constructed using standard responsive HTML5, ES6+ Javascript, and modern CSS variables.
+[ ] Persistent State: Implement local storage or lightweight authentication to save user history.
 
-### Local Development
-To run this application locally:
-1. Simply double-click `home.html` to open it in any web browser. Because the model weights are compiled as standard JavaScript constants, **you do not need to set up a local server** or worry about browser security blocking JSON fetch calls.
-2. Alternatively, start a simple Python server:
-   ```bash
-   python -m http.server 8000
-   ```
-   and navigate to `http://localhost:8000/home.html`.
+👩‍💻 Author
+Esha Naveed
 
-### Deploying to GitHub Pages (Free Hosting)
-Since all machine learning models run client-side, you can host this project on GitHub Pages:
-1. Initialize a git repository: `git init`
-2. Push to GitHub.
-3. Go to Repository **Settings** > **Pages**.
-4. Choose the `main` branch and root `/` directory. Click Save.
-5. Your application will be live at `https://<username>.github.io/<repo-name>/home.html`!
+Software Engineering Student passionate about AI, Machine Learning, and building efficient, intelligent web applications.
